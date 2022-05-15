@@ -31,8 +31,10 @@ const firebaseConfig = {
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
   const db = getFirestore(app);
+  console.log(db)
   const signInWithGoogle = async() => {
       try{
+          console.log("Google sign in")
           const res = signInWithPopup(auth, googleProvider);
           const user = res.user;
           const myQuery = query(collection(db, "Users"), where("uid", "==", user.uid));
@@ -54,6 +56,7 @@ const firebaseConfig = {
 const logInWithEmailAndPassword = async (email, password) => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      console.log('Successful login')
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -69,6 +72,7 @@ const logInWithEmailAndPassword = async (email, password) => {
         authProvider: "local",
         email,
       });
+      console.log("Successful sign in")
     } catch (err) {
       console.error(err);
       alert(err.message);
@@ -85,6 +89,7 @@ const logInWithEmailAndPassword = async (email, password) => {
   };
   const logout = () => {
     signOut(auth);
+    console.log("Logout")
   };
   export {
     auth,
