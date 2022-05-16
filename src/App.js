@@ -6,14 +6,16 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 import Question from './Components/Question';
 import Reset from './Components/Reset';
+import Header from './header/Header';
 function App() {
 
   
   return (
     <div className="App">
+    <Header></Header>
     <Routes>
-    <Route path="/" element={<Login/>}></Route>
-    <Route path="/signup" element={<SignUp/>}></Route>
+    <Route path="/Login" element={<Login/>}></Route>
+    <Route path="/Signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
     <Route path="/home" element={<Home/>}></Route>
     <Route path="/questions" element={<Question/>}></Route>
