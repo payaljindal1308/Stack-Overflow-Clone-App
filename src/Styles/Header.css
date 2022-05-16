@@ -1,0 +1,90 @@
+body{
+    font-family: var(--ff-sans);
+    background-color: rgb(255,255,255);
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(248,249,249);
+    padding: 2px;
+    border-bottom: 1px solid rgb(228, 217, 217);
+}
+
+.hamdiv{
+    margin-top: 10px;
+}
+.ham{
+    width: 15px;
+  height: 2px;
+  background-color: rgb(70, 65, 65);
+  margin: 3px;
+}
+
+.heading{
+    margin-left: 20px;
+
+}
+
+.logoimg{
+    width: 40px;
+    margin-top: 5px;
+}
+
+.webname{
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 7px;
+}
+
+.searchTab{
+    margin-left: 20px;
+    width: 40%;
+}
+
+.searchTab{
+    border: 1px solid rgb(196, 188, 188);
+    height: 35px;
+    color: rgb(148, 140, 140);
+    border-radius: 4px;
+}
+
+.buttonDiv{
+    margin-left: 20px;
+}
+
+.loginBtn{
+    width: 70px;
+    height: 35px;
+     background-color: rgb(224,236,244);
+     margin: 2px;
+     border: 1px solid #3c30e05e;
+     border-radius: 4px;
+}
+
+.signupBtn{
+    width: 70px;
+    height: 35px;
+     background-color: rgb(17,148,250);
+     margin: 2px;
+     border: 1px solid #3c30e05e;
+     border-radius: 4px;
+}
+
+.loginBtn:hover{
+    background-color: rgb(171, 212, 240);
+}
+
+.signupBtn:hover{
+    background-color: rgb(11, 110, 185);
+}
+
+
+.linkLogin{
+    text-decoration: none;
+    color: rgb(17,148,250);
+}
+
+.linkSignup{
+    text-decoration: none;
+    color: white;
+}
