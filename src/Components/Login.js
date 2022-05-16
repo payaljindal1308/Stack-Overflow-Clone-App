@@ -45,18 +45,25 @@ export const Login = () => {
    
 
     return (
+        <>
         <div className="loginContainer">
-            <form>
-                <h1>Login</h1>
-                <label className="inputField">Email</label>
-                <input className="inputField" placeholder="Email" type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
-                <input className="inputField" placeholder="Password" type="password" value={password} onChange={event => setPassword(event.target.value)}></input>
-                <button className="inputField" onClick={(e) => logInWithEmail(e,email, password)}>Login</button>
-                <button className="inputField" onClick={signinWithGoogle}>Login with Google</button>
-                <div><Link to="/reset">Forgot Password</Link></div>
-                <div>Don't have an account? <Link to="/signup">Register</Link> now.</div>
+            <div className="logoImgDiv"><img src="images/logo.png" alt="img"></img></div>
+            <button className="inputField"  onClick={signinWithGoogle}>
+                <img src="images/googleLogo1.png" alt="googleimg"></img>
+                <span> Log in with Google</span></button>
+            <form className="formField">
+                <label>Email</label>
+                <input type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
+                <label >Password
+                    <Link className="forgotLink" to="/reset">Forgot password?</Link>
+                </label>
+                <input type="password" value={password} autoComplete="current-password" onChange={event => setPassword(event.target.value)}></input>
+                <button className="loginButton" onClick={(e) => logInWithEmail(e,email, password)}>Log in</button>
             </form>
+            <div className="reset">Don't have an account? <Link className="resetLink" to="/signup">Sign up</Link></div>
+            <div className="error">{error}</div>
         </div>
+    </>
     )
 }
 
