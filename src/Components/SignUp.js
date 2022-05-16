@@ -55,35 +55,28 @@ export const SignUp = () => {
         }
       },[user])
 return (
-<div className="loginContainer">
-<form>
-<h1>Sign Up</h1>
-<div className="fieldwrapper">
-<label className="inputField">Display Name</label>
-<input className="inputField" placeholder="Display Name" type="text" value={name} onChange={event => setName(event.target.value)}></input>
-</div>
-<div className="fieldwrapper">
-<label className="inputField">Email</label>
-<input className="inputField" placeholder="Email" type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
-</div>
-<div className="fieldwrapper">
-<label className="inputField" >Password</label>
-<input className="inputField" placeholder="Password" type="password" value={password} onChange={event => setPassword(event.target.value)}></input>
-</div>
-<button className="inputField" onClick={register}>
-Sign up
-</button>
-<button
-className="inputField"
-onClick={signinWithGoogle}
->
-Register with Google
-</button>
-<div>
-Already have an account? <Link to="/">Login</Link> now.
-</div>
-<div className="error">{error}</div>
-</form>
-</div>
+    <div className="signupContainer">
+            <div className="signupHeading">Create your Stack Overflow Clone account. It's free and only takes a minute.</div>
+            <div>
+                <button className="signupGoogleField" onClick={signinWithGoogle}>
+                    <img src="images/googleLogo1.png" alt="googleimg"></img>
+                    <span> Sign up with Google</span>
+                </button>
+            </div>
+            <form className="signupForm">
+                <label>Display Name</label>
+                <input type="text" value={name} onChange={event => setName(event.target.value)}></input>
+                <label>Email</label>
+                <input type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
+                <label>Password</label>
+                <input type="password" value={password} onChange={event => setPassword(event.target.value)}></input>
+                <p>Password must contain at least eight characters, including at least 1 letter and 1 number.</p>
+                <button className="signupButton" onClick={register}>Sign up</button>
+            </form>
+            <div className="reset">
+                Already have an account? <Link className="resetLink" to="/login">Log in</Link>
+                <div className="error">{error}</div>
+            </div>
+        </div>
 )
 }
