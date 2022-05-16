@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 import {
     GoogleAuthProvider,
-    getAuth,
     signInWithEmailAndPassword,
     signInWithPopup,
     createUserWithEmailAndPassword,
@@ -28,16 +29,18 @@ const firebaseConfig = {
   };
 
   const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
+  export const auth = getAuth(app);
   const db = getFirestore(app);
   console.log(db)
+
+  
   const signInWithGoogle = async() => {
       try{
+          const googleAuth = new GoogleAuthProvider()
+          const res = await signInWithPopup(auth, googleAuth);
           console.log("Google sign in")
-          const res = signInWithPopup(auth, googleProvider);
           const user = res.user;
-          const myQuery = query(collection(db, "Users"), where("uid", "==", user.uid));
+          const myQuery = await query(collection(db, "Users"), where("uid", "==", user.uid));
           const docs = await getDocs(myQuery);
           if(docs.docs.length === 0){
             await addDoc(collection(db, "Users"), {
@@ -47,25 +50,27 @@ const firebaseConfig = {
                 email: user.email,
               });
           }
+        return res;
       }
       catch(err){
-        console.log("Error: ",err)
+        return err
       }
   }
 
 const logInWithEmailAndPassword = async (email, password) => {
     try {
+      console.log("Login")
       await signInWithEmailAndPassword(auth, email, password);
       console.log('Successful login')
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      throw err
     }
   };
   const registerWithEmailAndPassword = async (name, email, password) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
+      console.log(user)
       await addDoc(collection(db, "Users"), {
         uid: user.uid,
         name,
@@ -74,8 +79,7 @@ const logInWithEmailAndPassword = async (email, password) => {
       });
       console.log("Successful sign in")
     } catch (err) {
-      console.error(err);
-      alert(err.message);
+      throw err
     }
   };
   const sendPasswordReset = async (email) => {
@@ -87,12 +91,11 @@ const logInWithEmailAndPassword = async (email, password) => {
       alert(err.message);
     }
   };
-  const logout = () => {
-    signOut(auth);
+  const  logout = async() => {
+    await signOut(auth);
     console.log("Logout")
   };
   export {
-    auth,
     db,
     signInWithGoogle,
     logInWithEmailAndPassword,
@@ -100,4 +103,6 @@ const logInWithEmailAndPassword = async (email, password) => {
     sendPasswordReset,
     logout,
   };
+  
+
   

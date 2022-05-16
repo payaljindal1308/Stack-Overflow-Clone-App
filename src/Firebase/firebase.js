@@ -1,5 +1,6 @@
-import {initializeApp} from "firebase/app";
-import {getFirestore} from "firebase/firestore";
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
 const firebaseConfig = {
     apiKey: "AIzaSyAoD_gI344FAhODlP5B6Ns48uwqp8689s0",
     authDomain: "stackoverflow-594fd.firebaseapp.com",
@@ -10,7 +11,8 @@ const firebaseConfig = {
     measurementId: "G-6GEV0M9M2V"
   };
 
+
+
+
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app)
-console.log(db)
-  export {db}
+  export const auth = getAuth(app);
