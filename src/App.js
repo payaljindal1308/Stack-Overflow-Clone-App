@@ -24,7 +24,7 @@ function App() {
         unsubscribe();
     }
 }, [])
-console.log(user)
+
   return (
     <div className="App">
     <UserContext.Provider value={user}>
@@ -34,7 +34,7 @@ console.log(user)
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
     <Route path="/home" element={<ProtectedRoutes><Home/></ProtectedRoutes>}></Route>
-    <Route path="/question" element={<ProtectedRoutes><Question/></ProtectedRoutes>}></Route>
+    <Route path="/question/:id" element={<ProtectedRoutes><Question/></ProtectedRoutes>}></Route>
     <Route path="/questions" element={<ProtectedRoutes><Questions/></ProtectedRoutes>}></Route>
     <Route path='/askPage' element={<ProtectedRoutes><AskPage /></ProtectedRoutes>}></Route>
     </Routes>

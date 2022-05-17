@@ -12,7 +12,6 @@ import { logout } from "../Firebase/firebaseAuth";
 function Header() {
     const [user, setUser] = useState(null)
     const navigate= useNavigate();
-    console.log(user)
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -52,7 +51,7 @@ function Header() {
             </div>)}
             {user&&(
                 <div>
-                <span>{user.displayName}</span>
+                <span> {user.email}</span><span>  </span>
                 <button className="signupBtn" onClick={logOut}>Log Out</button>
                 </div>
            )}

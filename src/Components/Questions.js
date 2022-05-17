@@ -19,10 +19,6 @@ useEffect(() => {
   })
 },[])
 
-questions.map(element => {
-  console.log(element.data.Title)
-})
-
     return (
         <>
             <div className="mainDiv">
@@ -35,7 +31,7 @@ questions.map(element => {
                         <a href="/questions">
                             <span> Questions</span></a>
                         <a href="/questions">Tags</a>
-                        <a href="/questions">Users</a>
+                        <a href="/home">Users</a>
                     </div>
                 </div>
                 <div className="midDiv">
@@ -51,7 +47,7 @@ questions.map(element => {
                                 
                                 return <div className="allQuediv">
                                         <div>
-                                            <Link to="/question">{que.data.Title}</Link>
+                                            <Link to={`/question/${que.id}`}>{que.data.Title}</Link>
                                         </div>
                                         <div></div>
                                     </div>                           
