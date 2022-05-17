@@ -19,7 +19,7 @@ export const Login = () => {
         }
         catch(err){
             alert(err)
-            navigate('/Login')
+            navigate('/')
         }
     }
 
@@ -31,7 +31,7 @@ export const Login = () => {
         }
         catch(err){
             alert(err)
-            navigate('/Login')
+            navigate('/')
         }
     }
     useEffect(() => {
@@ -48,7 +48,7 @@ export const Login = () => {
             navigate('/questions')
         }
         else{
-            navigate('/Login')
+            navigate('/')
         }
     },[user])
 

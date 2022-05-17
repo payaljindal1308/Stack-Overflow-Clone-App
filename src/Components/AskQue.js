@@ -8,6 +8,7 @@ import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../Firebase/firebaseAuth';
 import '../Styles/AskQue.css'
+import MyEditor from './Editor/MyEditor';
 
 function AskPage() {
 
@@ -15,48 +16,48 @@ function AskPage() {
   const [title, setTitle] = useState('');
   const [body,setBody] = useState('');
   const [users, setusers] = useState([]);
+  const [questions, setquestions]= useState([]);
+  const [id,setid] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
    })
-   return () => {
-     unsubscribe();
-   }
-  },[])
-
-
-useEffect(() => {
-  const q = query(collection(db, 'Users'))
-  onSnapshot(q, (querySnapshot) => {
-    setusers(querySnapshot.docs.map(doc => ({
+   
+   const q = query(collection(db, 'Users'))
+   onSnapshot(q, (querySnapshot) => {
+     setusers(querySnapshot.docs.map(doc => ({
       id: doc.id,
       data: doc.data()
     })))
   })
+  return () => {
+    unsubscribe();
+  }
+  },[])
+
+
+
+async function postQuestion(ev) {
   users.map(element => {
-    if(element.data.email === user.email){
-      setUser({...user, name: element.data.name})
+    if(element.data.email === user?.email){
+      setid(element.id)
+      setquestions(element.data.questions? element.data.questions: [])
     }
   })
-},[])
-
-
-  async function postQuestion(ev) {
-    try{
-    ev.preventDefault();
-    console.log(user.displayName)
-    await sendQuestion(title, body,user.displayName, user.email)
-    navigate('/home')
+  try{
+    if(user.displayName){
+      await sendQuestion(title, body,user.displayName, user.email, id, questions)
+      console.log(id)
+      navigate('/questions')
     }
-    catch(err){
-      console.log(err)
-    }
+    
   }
-
-  function dropfun() {
-    document.getElementById("myDropdown").classList.toggle("show");
+  
+  catch(err){
+    console.log(err)
   }
+}
 
   return (
     <div>
@@ -66,16 +67,14 @@ useEffect(() => {
                 <div className='queForm'>
                     <h1>Title</h1>
                     <p>Be specific and imagine you're asking a question to another person</p>
-                    <input type="text" defaultValue='e.g. is there an R function for finding the index of an element in a vector?'></input>
+                    <input type="text" onChange={(e) => setTitle(e.target.value)} defaultValue={title}></input>
                     <h1>Body</h1>
                     <p>Include all the information someone would need to answer your question</p>
-                    <textarea></textarea>
+                    <MyEditor onChange={(e) => setBody(e.target.value)} defaultValue={body}></MyEditor>
                     <h1>Tags</h1>
                     <p>Add up to 5 tags to describe what your question is about</p>
                     <input type="text" defaultValue="e.g. (wordpress r css)"></input>
                 </div>
-
-
                 <div className='steps'>
                     <div className='stepHeading'>Step 1: Draft your question</div>
                     <p>The community is here to help you with specific coding, algorith, or language problems.</p>
@@ -100,7 +99,7 @@ useEffect(() => {
                 </div>
             </div>
                 <div className='reviewBtnDiv'>
-                    <button className='reviewBtn'>Review your question</button>
+                    <button className='reviewBtn' onClick={postQuestion}>Review your question</button>
                 </div>
         </div>
     </div>

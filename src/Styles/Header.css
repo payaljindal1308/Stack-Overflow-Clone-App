@@ -68,6 +68,7 @@ body{
      margin: 2px;
      border: 1px solid #3c30e05e;
      border-radius: 4px;
+     color: white;
 }
 
 .loginBtn:hover{

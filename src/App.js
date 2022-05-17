@@ -9,14 +9,29 @@ import Reset from './Components/Reset';
 import Header from './Components/Header';
 import Questions from './Components/Questions';
 import AskPage from './Components/AskQue';
+import UserContext from './UserContext';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './Firebase/firebaseAuth';
+import ProtectedRoutes from './Components/ProtectedRoutes';
 function App() {
 
-  
+  const [user,setUser] = useState('');
+  useEffect(() =>  async function(){
+    const unsubscribe = await onAuthStateChanged(auth, (currentUser) => {
+        setUser(currentUser)
+    })
+    return () => {
+        unsubscribe();
+    }
+}, [])
+console.log(user)
   return (
     <div className="App">
+    <UserContext.Provider value={user}>
     <Header></Header>
     <Routes>
-    <Route path="/Login" element={<Login/>}></Route>
+    <Route path="/" element={<Login/>}></Route>
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
     <Route path="/home" element={<Home/>}></Route>
@@ -24,6 +39,7 @@ function App() {
     <Route path="/questions" element={<Questions/>}></Route>
     <Route path='/askPage' element={<AskPage></AskPage>}></Route>
     </Routes>
+    </UserContext.Provider>
     </div>
   );
 }

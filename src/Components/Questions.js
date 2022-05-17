@@ -28,18 +28,16 @@ questions.map(element => {
             <div className="mainDiv">
                 <div className="leftdiv">
                     <div className="homelink">
-                        <a href="/">Home</a>
+                        <a href="/questions">Home</a>
                     </div>
                     <span className="public">PUBLIC</span>
                     <div className="publicLink">
                         <a href="/questions">
                             <span> Questions</span></a>
-                        <a href="/">Tags</a>
-                        <a href="/">Users</a>
+                        <a href="/questions">Tags</a>
+                        <a href="/questions">Users</a>
                     </div>
                 </div>
-
-
                 <div className="midDiv">
                     <div className="topque">
                         <span>Top Questions</span>

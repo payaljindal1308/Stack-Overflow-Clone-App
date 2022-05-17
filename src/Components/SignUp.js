@@ -48,7 +48,7 @@ export const SignUp = () => {
 
       useEffect(() => {
         if(user){
-          navigate('/home')
+          navigate('/questions')
         }
       },[user])
   return (
@@ -71,7 +71,7 @@ export const SignUp = () => {
         <button className="signupButton" onClick={register}>Sign up</button>
       </form>
       <div className="reset">
-        Already have an account? <Link className="resetLink" to="/Login">Log in</Link>
+        Already have an account? <Link className="resetLink" to="/">Log in</Link>
         <div className="error">{error}</div>
       </div>
     </div>

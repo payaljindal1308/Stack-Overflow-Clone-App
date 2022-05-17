@@ -1,8 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import '../Styles/Header.css'
+import { auth } from "../Firebase/firebaseAuth";
+import { onAuthStateChanged } from "firebase/auth";
+import userContext from "../UserContext";
+import { useContext } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { logout } from "../Firebase/firebaseAuth";
 
 function Header() {
+    const [user, setUser] = useState(null)
+    const navigate= useNavigate();
+    console.log(user)
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
+        })
+        return () => {
+            unsubscribe();
+        }
+    }, [])
+    const logOut = async() => {
+        try{
+          await logout();
+          await navigate('/')
+          console.log("successful logout")
+        }
+        catch(err){
+          alert(err)
+          navigate('/questions')
+        }
+      }
     return (
         <div>
             <div className="navbar">
@@ -16,11 +46,16 @@ function Header() {
                 </div>
                 <span className="webname">stack <b> overflow clone</b></span>
                 <input className="searchTab"></input>
-                <div className="buttonDiv">
-                    <button className="loginBtn"><Link className='linkLogin' to='/Login'>Log in</Link></button>
-                    <button className="signupBtn"><Link className='linkSignup' to='/Signup'>Sign up</Link></button>
+                {!user&&(<div className="buttonDiv">
+                <button className="loginBtn"><Link className='linkLogin' to='/'>Log in</Link></button>
+                <button className="signupBtn"><Link className='linkSignup' to='/Signup'>Sign up</Link></button>
+            </div>)}
+            {user&&(
+                <div>
+                <span>{user.displayName}</span>
+                <button className="signupBtn" onClick={logOut}>Log Out</button>
                 </div>
-                
+           )}
             </div>
         </div>
     )
