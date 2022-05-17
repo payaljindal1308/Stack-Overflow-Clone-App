@@ -15,7 +15,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase/firebaseAuth';
 import ProtectedRoutes from './Components/ProtectedRoutes';
 function App() {
-
   const [user,setUser] = useState('');
   useEffect(() =>  async function(){
     const unsubscribe = await onAuthStateChanged(auth, (currentUser) => {
@@ -34,10 +33,10 @@ console.log(user)
     <Route path="/" element={<Login/>}></Route>
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
-    <Route path="/home" element={<Home/>}></Route>
-    <Route path="/question" element={<Question/>}></Route>
-    <Route path="/questions" element={<Questions/>}></Route>
-    <Route path='/askPage' element={<AskPage></AskPage>}></Route>
+    <Route path="/home" element={<ProtectedRoutes><Home/></ProtectedRoutes>}></Route>
+    <Route path="/question" element={<ProtectedRoutes><Question/></ProtectedRoutes>}></Route>
+    <Route path="/questions" element={<ProtectedRoutes><Questions/></ProtectedRoutes>}></Route>
+    <Route path='/askPage' element={<ProtectedRoutes><AskPage /></ProtectedRoutes>}></Route>
     </Routes>
     </UserContext.Provider>
     </div>
