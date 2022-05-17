@@ -15,11 +15,11 @@ export const Login = () => {
         try{
             e.preventDefault();
             await logInWithEmailAndPassword(email,password);
-            navigate('/home')
+            navigate('/questions')
         }
         catch(err){
             alert(err)
-            navigate('/')
+            navigate('/Login')
         }
     }
 
@@ -27,11 +27,11 @@ export const Login = () => {
         try{
             e.preventDefault();
             await signInWithGoogle();
-            navigate('/home')
+            navigate('/questions')
         }
         catch(err){
             alert(err)
-            navigate('/')
+            navigate('/Login')
         }
     }
     useEffect(() => {
@@ -43,6 +43,14 @@ export const Login = () => {
         }
     }, [])
    
+    useEffect(()=>{
+        if(user){
+            navigate('/questions')
+        }
+        else{
+            navigate('/Login')
+        }
+    },[user])
 
     return (
         <>
@@ -53,15 +61,14 @@ export const Login = () => {
                 <span> Log in with Google</span></button>
             <form className="formField">
                 <label>Email</label>
-                <input type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
+                <input type="email" onChange={event => setEmail(event.target.value)}></input>
                 <label >Password
                     <Link className="forgotLink" to="/reset">Forgot password?</Link>
                 </label>
-                <input type="password" value={password} autoComplete="current-password" onChange={event => setPassword(event.target.value)}></input>
+                <input type="password" autoComplete="current-password" onChange={event => setPassword(event.target.value)}></input>
                 <button className="loginButton" onClick={(e) => logInWithEmail(e,email, password)}>Log in</button>
             </form>
-            <div className="reset">Don't have an account? <Link className="resetLink" to="/signup">Sign up</Link></div>
-            <div className="error">{error}</div>
+            <div className="reset">Don't have an account? <Link className="resetLink" to="/Signup">Sign up</Link></div>
         </div>
     </>
     )

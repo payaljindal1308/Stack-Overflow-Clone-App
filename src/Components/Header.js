@@ -15,7 +15,7 @@ function Header() {
                     <img className="logoimg" src="images/logo.png" alt="logo"></img>
                 </div>
                 <span className="webname">stack <b> overflow clone</b></span>
-                <input className="searchTab" value='Search...'></input>
+                <input className="searchTab"></input>
                 <div className="buttonDiv">
                     <button className="loginBtn"><Link className='linkLogin' to='/Login'>Log in</Link></button>
                     <button className="signupBtn"><Link className='linkSignup' to='/Signup'>Sign up</Link></button>

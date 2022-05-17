@@ -3,11 +3,7 @@ import { useState, useEffect } from "react"
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {
-    auth,
-    registerWithEmailAndPassword,
-    signInWithGoogle,
-  } from "../Firebase/firebaseAuth";
+import {auth,registerWithEmailAndPassword,signInWithGoogle} from "../Firebase/firebaseAuth";
 import '../Styles/signup.css'
 
 export const SignUp = () => {
@@ -17,6 +13,7 @@ export const SignUp = () => {
     const [error, setError] = useState('');
     // const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
+
     const register = async(e) => {
       e.preventDefault()
       try{
@@ -33,7 +30,7 @@ export const SignUp = () => {
         try{
             e.preventDefault();
             await signInWithGoogle();
-            navigate('/home')
+            navigate('/questions')
         }
         catch(err){
             alert(err)
@@ -54,29 +51,29 @@ export const SignUp = () => {
           navigate('/home')
         }
       },[user])
-return (
+  return (
     <div className="signupContainer">
-            <div className="signupHeading">Create your Stack Overflow Clone account. It's free and only takes a minute.</div>
-            <div>
-                <button className="signupGoogleField" onClick={signinWithGoogle}>
-                    <img src="images/googleLogo1.png" alt="googleimg"></img>
-                    <span> Sign up with Google</span>
-                </button>
-            </div>
-            <form className="signupForm">
-                <label>Display Name</label>
-                <input type="text" value={name} onChange={event => setName(event.target.value)}></input>
-                <label>Email</label>
-                <input type="email" value={email} onChange={event => setEmail(event.target.value)}></input>
-                <label>Password</label>
-                <input type="password" value={password} onChange={event => setPassword(event.target.value)}></input>
-                <p>Password must contain at least eight characters, including at least 1 letter and 1 number.</p>
-                <button className="signupButton" onClick={register}>Sign up</button>
-            </form>
-            <div className="reset">
-                Already have an account? <Link className="resetLink" to="/login">Log in</Link>
-                <div className="error">{error}</div>
-            </div>
-        </div>
-)
+      <div className="signupHeading">Create your Stack Overflow Clone account. It's free and only takes a minute.</div>
+      <div>
+        <button className="signupGoogleField" onClick={signinWithGoogle}>
+          {/* <img src="images/googleLogo1.png" alt="googleimg"></img> */}
+          <span> Sign up with Google</span>
+        </button>
+      </div>
+      <form className="signupForm">
+        <label>Display Name</label>
+        <input type="text" onChange={event => setName(event.target.value)}></input>
+        <label>Email</label>
+        <input type="email" onChange={event => setEmail(event.target.value)}></input>
+        <label>Password</label>
+        <input type="password" onChange={event => setPassword(event.target.value)}></input>
+        <p>Password must contain at least eight characters, including at least 1 letter and 1 number.</p>
+        <button className="signupButton" onClick={register}>Sign up</button>
+      </form>
+      <div className="reset">
+        Already have an account? <Link className="resetLink" to="/Login">Log in</Link>
+        <div className="error">{error}</div>
+      </div>
+    </div>
+  )
 }

@@ -6,7 +6,9 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 import Question from './Components/Question';
 import Reset from './Components/Reset';
-import Header from './header/Header';
+import Header from './Components/Header';
+import Questions from './Components/Questions';
+import AskPage from './Components/AskQue';
 function App() {
 
   
@@ -15,10 +17,12 @@ function App() {
     <Header></Header>
     <Routes>
     <Route path="/Login" element={<Login/>}></Route>
-    <Route path="/Signup" element={<SignUp/>}></Route>
+    <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
     <Route path="/home" element={<Home/>}></Route>
-    <Route path="/questions" element={<Question/>}></Route>
+    <Route path="/question" element={<Question/>}></Route>
+    <Route path="/questions" element={<Questions/>}></Route>
+    <Route path='/askPage' element={<AskPage></AskPage>}></Route>
     </Routes>
     </div>
   );

@@ -1,0 +1,138 @@
+body{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.mainDiv{
+    display: flex;
+    justify-content: center;
+}
+
+
+.leftdiv{
+    color: rgb(122,127,133);
+    text-align: left;
+    border-right: 1px solid rgb(196, 193, 193);
+}
+
+
+.leftdiv a{
+   text-decoration: none;
+   color: rgb(122,127,133);
+   margin-top: 20px;
+}
+
+.leftdiv a:focus{
+    background-color: rgb(241,242,243);
+    border-right: 2px solid orangered;
+    color: black;
+}
+
+
+.homelink{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    width: 150px;
+    height: 30px;
+    background-color: rgb(241,242,243);
+    border-right: 2px solid orangered;
+}
+
+
+.public{
+    margin-top: 50px;
+}
+
+
+.publicLink{
+    display: flex;
+    color: rgb(122,127,133);
+    flex-direction: column;
+    margin-left: 40px;
+}
+
+
+.midDiv{
+    width: 40%;
+}
+
+
+.topque{
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+
+.askQueBtn{
+    float: right;
+    margin-right: 10px;
+    height: 40px;
+    background-color: rgb(17,148,250);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+
+.askQueBtn:hover{
+    background-color: rgb(16, 121, 202);
+}
+
+
+.topque span{
+    font-size: 30px;
+    float: left;
+    margin-left: 12px;
+}
+
+.allQuediv{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(211, 205, 205);
+}
+
+
+.allQuediv a{
+    text-decoration: none;
+    color: rgb(16, 121, 202);
+    float: left;
+    padding: 30px;
+}
+
+
+.rightdiv{
+    margin-left: 20px;
+    margin-top: 20px;
+   background-color: rgb(253,247,226);
+   border-radius: 10px;
+   border: 1px solid rgb(241,230,189);
+   text-align: left;
+   height: fit-content;
+   width: 300px;
+   margin-right: 20px;
+   font-size: 14px;
+}
+
+.rightDivHeading{
+    border-top: 1px solid rgb(241,230,189);
+    border-bottom: 1px solid rgb(241,230,189);
+    padding: 15px;
+    margin-left: px;
+    color: rgb(112, 98, 99);
+    font-weight: 600;
+}
+
+.rightDivexp{
+    margin-left: 30px;
+    color: rgb(49, 48, 48);
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .rightdiv {
+      display: none;
+    }
+    .midDiv{
+        width: 75%;
+    }
+  }

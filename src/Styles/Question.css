@@ -1,0 +1,16 @@
+.question{
+    margin: 0 auto;
+}
+
+.queHeading{
+    width: 60%; 
+    margin: 0 auto;  
+    padding: 40px;
+}
+
+.queHeading span{
+    width: 80%;
+    font-size: 28px;
+    float: left;
+    color: rgb(77, 74, 74);
+}
