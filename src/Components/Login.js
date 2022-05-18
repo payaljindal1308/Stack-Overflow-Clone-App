@@ -3,7 +3,6 @@ import '../Styles/login.css'
 import { onAuthStateChanged } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../Firebase/firebaseAuth"
-import { useAuthState } from "react-firebase-hooks/auth"
 export const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -68,7 +67,7 @@ export const Login = () => {
                 <input type="password" autoComplete="current-password" onChange={event => setPassword(event.target.value)}></input>
                 <button className="loginButton" onClick={(e) => logInWithEmail(e,email, password)}>Log in</button>
             </form>
-            <div className="reset">Don't have an account? <Link className="resetLink" to="/Signup">Sign up</Link></div>
+            <div className="reset">Don't have an account? <Link className="resetLink" to="/signup">Sign up</Link></div>
         </div>
     </>
     )

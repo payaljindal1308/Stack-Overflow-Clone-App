@@ -30,8 +30,8 @@ useEffect(() => {
                     <div className="publicLink">
                         <a href="/questions">
                             <span> Questions</span></a>
-                        <a href="/questions">Tags</a>
-                        <a href="/home">Users</a>
+                        <a href="/tag">Tags</a>
+                        <a href="/user">Users</a>
                     </div>
                 </div>
                 <div className="midDiv">
@@ -45,7 +45,7 @@ useEffect(() => {
                         {
                             questions.map(que => {
                                 
-                                return <div className="allQuediv">
+                                return <div key={que.id} className="allQuediv">
                                         <div>
                                             <Link to={`/question/${que.id}`}>{que.data.Title}</Link>
                                         </div>

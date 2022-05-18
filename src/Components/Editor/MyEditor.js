@@ -8,10 +8,9 @@ import '../../../node_modules/draft-js/dist/Draft.css';
         constructor(props) {
           super(props);
           this.state = {editorState: EditorState.createEmpty()};
-
           this.focus = () => this.refs.editor.focus();
-          this.onChange = (editorState) => this.setState({editorState});
-
+          this.onChange = (editorState) => {this.setState({editorState})
+        }
           this.handleKeyCommand = this._handleKeyCommand.bind(this);
           this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);
           this.toggleBlockType = this._toggleBlockType.bind(this);

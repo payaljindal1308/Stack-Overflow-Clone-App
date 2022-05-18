@@ -1,6 +1,5 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react"
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {auth,registerWithEmailAndPassword,signInWithGoogle} from "../Firebase/firebaseAuth";
@@ -10,8 +9,6 @@ export const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState('');
-    const [error, setError] = useState('');
-    // const [user, loading, error] = useAuthState(auth);
     const navigate = useNavigate();
 
     const register = async(e) => {
@@ -19,16 +16,15 @@ export const SignUp = () => {
       try{
         if (!name) alert("Please enter name");
         await registerWithEmailAndPassword(name, email, password);
-        navigate('/')
+        navigate('/questions')
       }
       catch(err){
-        setError(err)
         console.log(err)
       }
       };
       const signinWithGoogle = async(e) => {
+        e.preventDefault();
         try{
-            e.preventDefault();
             await signInWithGoogle();
             navigate('/questions')
         }
@@ -72,7 +68,6 @@ export const SignUp = () => {
       </form>
       <div className="reset">
         Already have an account? <Link className="resetLink" to="/">Log in</Link>
-        <div className="error">{error}</div>
       </div>
     </div>
   )

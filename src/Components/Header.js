@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import '../Styles/Header.css'
 import { auth } from "../Firebase/firebaseAuth";
 import { onAuthStateChanged } from "firebase/auth";
-import userContext from "../UserContext";
-import { useContext } from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../Firebase/firebaseAuth";
@@ -40,9 +38,9 @@ function Header() {
                     <div className="ham"></div>
                     <div className="ham"></div>
                 </div>
-                <div className="heading">
+                <a href="/questions"><div className="heading">
                     <img className="logoimg" src="images/logo.png" alt="logo"></img>
-                </div>
+                </div></a>
                 <span className="webname">stack <b> overflow clone</b></span>
                 <input className="searchTab"></input>
                 {!user&&(<div className="buttonDiv">

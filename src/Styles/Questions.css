@@ -98,7 +98,10 @@ html{
     float: left;
     padding: 30px;
 }
-
+.allQuediv a:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
 
 .rightdiv{
     margin-left: 20px;

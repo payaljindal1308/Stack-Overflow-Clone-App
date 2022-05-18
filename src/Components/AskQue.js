@@ -60,7 +60,7 @@ function AskPage() {
       }
     })
   }
-
+  
   return (
     <div>
       <div className='fullQuePage'>
@@ -72,7 +72,7 @@ function AskPage() {
             <input type="text" onChange={(e) => setTitle(e.target.value)} defaultValue={title}></input>
             <h1>Body</h1>
             <p>Include all the information someone would need to answer your question</p>
-            <MyEditor onChange={(e) => setBody(e.target.value)} defaultValue={body}></MyEditor>
+            <MyEditor></MyEditor>
             <h1>Tags</h1>
             <p>Add up to 5 tags to describe what your question is about</p>
             <input type="text" defaultValue="e.g. (wordpress r css)"></input>
@@ -106,14 +106,6 @@ function AskPage() {
       </div>
     </div>
 
-
-    // <div>
-    // <label>Title</label>
-    // <input type="text" onChange={(e) => setTitle(e.target.value)} defaultValue={title}></input>
-    // <label>Body</label>
-    // <input type="text" onChange={(e) => setBody(e.target.value)} defaultValue={body}></input>
-    // <button onClick={postQuestion}>Post Question</button>
-    // </div>
   )
 }
 
