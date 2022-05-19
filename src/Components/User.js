@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Firebase/firebaseAuth';
 import { useNavigate } from 'react-router-dom';
 import "../Styles/User.css"
+import SideNav from './SideNav';
 
 function UserPage() {
   const [users, setusers] = useState([])
@@ -36,18 +37,7 @@ users.map(element => {
 })
   return (
     <div className='userPage'>
-      <div className="leftdiv">
-        <div className="homelink">
-          <a href="/questions">Home</a>
-        </div>
-        <span className="public">PUBLIC</span>
-        <div className="publicLink">
-          <a href="/questions">
-            <span> Questions</span></a>
-          <a href="/tag">Tags</a>
-          <a href="/user">Users</a>
-        </div>
-      </div>
+      <SideNav></SideNav>
       <div className='users'>
         <h1>Users</h1>
         <input type="text" placeholder='Filter by user'></input>

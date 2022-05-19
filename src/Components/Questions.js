@@ -4,6 +4,7 @@ import { query, collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../Firebase/firebaseAuth'
 import { Link } from "react-router-dom";
 import '../Styles/Question.css'
+import SideNav from "./SideNav";
 
 
 function Questions(){
@@ -22,18 +23,7 @@ useEffect(() => {
     return (
         <>
             <div className="mainDiv">
-                <div className="leftdiv">
-                    <div className="homelink">
-                        <a href="/questions">Home</a>
-                    </div>
-                    <span className="public">PUBLIC</span>
-                    <div className="publicLink">
-                        <a href="/questions">
-                            <span> Questions</span></a>
-                        <a href="/tag">Tags</a>
-                        <a href="/user">Users</a>
-                    </div>
-                </div>
+                <SideNav></SideNav>
                 <div className="midDiv">
                     <div className="topque">
                         <span>Top Questions</span>

@@ -1,21 +1,11 @@
 import React from "react";
 import "../Styles/Tags.css"
+import SideNav from "./SideNav";
 
 function Tags(){
     return (
         <div className='tagPage'>
-            <div className="leftdiv">
-                <div className="homelink">
-                    <a href="/questions">Home</a>
-                </div>
-                <span className="public">PUBLIC</span>
-                <div className="publicLink">
-                    <a href="/questions">
-                        <span> Questions</span></a>
-                    <a href="/tag">Tags</a>
-                    <a href="/user">Users</a>
-                </div>
-            </div>
+            <SideNav></SideNav>
             <div className='tags'>
                 <h1>Tags</h1>
                 <input type="text" placeholder='Filter by user'></input>

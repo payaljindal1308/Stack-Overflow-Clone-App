@@ -12,7 +12,8 @@ body{
 }
 
 .hamdiv{
-    margin-top: 10px;
+    display: none;
+    border: none;
 }
 .ham{
     width: 15px;
@@ -21,10 +22,7 @@ body{
   margin: 3px;
 }
 
-.heading{
-    margin-left: 20px;
 
-}
 
 .logoimg{
     width: 40px;
@@ -65,9 +63,11 @@ body{
      margin: 2px;
      border: 1px solid #3c30e05e;
      border-radius: 4px;
+     cursor: pointer;
 }
 
 .signupBtn{
+    cursor: pointer;
     width: 70px;
     height: 35px;
      background-color: rgb(17,148,250);
@@ -75,6 +75,10 @@ body{
      border: 1px solid #3c30e05e;
      border-radius: 4px;
      color: white;
+}
+
+#myDropdown{
+    display: none;
 }
 
 .loginBtn:hover{
@@ -108,3 +112,15 @@ body{
         width: 20%;
     }
   }
+
+  @media only screen and (max-width: 500px){
+    .searchTab{
+       width: 25%;
+    }
+  } 
+
+  @media only screen and (max-width: 500px){
+    .hamdiv{
+        display: block;
+    }
+  } 

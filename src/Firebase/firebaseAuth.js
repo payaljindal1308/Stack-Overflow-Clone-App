@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { query, collection, onSnapshot } from 'firebase/firestore'
-
+import { doc, deleteDoc } from "firebase/firestore";
 import {
     GoogleAuthProvider,
     signInWithEmailAndPassword,
@@ -18,7 +18,6 @@ import{
     addDoc,
     setDoc,
     updateDoc,
-    doc
 } from "firebase/firestore"
 
 const firebaseConfig = {
@@ -50,6 +49,9 @@ const firebaseConfig = {
                 name: user.displayName,
                 authProvider: "google",
                 email: user.email,
+                questions: [],
+                upvotes: 0,
+                downvotes: 0
               });
           }
         return res;
@@ -79,6 +81,9 @@ const logInWithEmailAndPassword = async (email, password) => {
         name,
         authProvider: "local",
         email,
+        questions: [],
+        upvotes: 0,
+        downvotes: 0
       });
       console.log("Successful sign in")
     } catch (err) {
@@ -95,12 +100,14 @@ const logInWithEmailAndPassword = async (email, password) => {
         Author: email,
         email: email,
         answers: [],
+        upvotes: 0,
+        downvotes: 0
         //tags: usertags
       })
       .then((docid) => {
         const updateref = doc(db,"Users",id)
         updateDoc(updateref,{
-        questions: [...questions, {id: docid}],
+        questions: [...questions, docid],
         //tags: [...new Set([...userpersonaltags, usertags])]
       })
       // .then(() => {
@@ -131,16 +138,67 @@ const logInWithEmailAndPassword = async (email, password) => {
     // }
     }
 
-    const sendAnswer = async(answers,answer, questionid) => {
+    const sendAnswer = async(answers,answer, questionid, email) => {
       try {
         const updaterefanswer = doc(db,"Questions",questionid)
         await updateDoc(updaterefanswer,{
-          answers: [...answers, answer]
+          answers: [...answers, {body: answer, email: email, upvotes: 0, downvotes: 0} ]
         })
         console.log("Successful Addition of Answer")
       } catch (err) {
         throw err
       }
+    }
+
+
+    const changeUserUpvotes = async(id, upvote) => {
+      console.log("Change User upvotes", upvote)
+      const updateref = doc(db,"Users",id)
+      await updateDoc(updateref,{
+      upvotes: upvote+1
+    })
+    }
+
+    const changeUserDownvotes = async(id, downvotes) => {
+      console.log("User downvotes called", downvotes)
+      const updateref = doc(db,"Users",id)
+      await updateDoc(updateref,{
+      downvotes : downvotes-1
+    })
+  }
+
+    const changeQuestionUpvotes = async(id, upvotes) => {
+      console.log("Change question upvotes")
+      const updateref = doc(db,"Questions",id)
+      await updateDoc(updateref,{
+      upvotes: upvotes+1
+      })
+    }
+
+
+    const changeQuestionDownvotes = async(id, downvotes) => {
+      console.log("Change question downvotes")
+      const updateref = doc(db,"Questions",id)
+      await updateDoc(updateref,{
+      downvotes: downvotes-1
+      })
+    }
+
+    const changeAnswers = async(id, answers) => {
+      console.log("Answer called", answers)
+      const updateref = doc(db, "Questions",id)
+      await updateDoc(updateref,{
+        answers: answers
+      })
+    }
+
+    const deleteQuestionFromDB = async(qid, uid, questions) => {
+      console.log("Delete question called")
+      await deleteDoc(doc(db, "Questions", qid));
+      const updateref = doc(db,"Users",uid)
+      await updateDoc(updateref,{
+      questions: questions
+    })
     }
 
   // const sendPasswordReset = async (email) => {
@@ -163,7 +221,13 @@ const logInWithEmailAndPassword = async (email, password) => {
     registerWithEmailAndPassword,
     logout,
     sendQuestion,
-    sendAnswer
+    sendAnswer,
+    changeQuestionDownvotes,
+    changeQuestionUpvotes,
+    changeUserDownvotes,
+    changeUserUpvotes,
+    changeAnswers,
+    deleteQuestionFromDB
   };
   
 

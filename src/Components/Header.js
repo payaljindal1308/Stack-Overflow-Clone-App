@@ -30,14 +30,21 @@ function Header() {
           navigate('/questions')
         }
       }
+
+
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+      
+
     return (
         <div>
             <div className="navbar">
-                <div className="hamdiv">
+                <button className="hamdiv" onclick={myFunction}>
                     <div className="ham"></div>
                     <div className="ham"></div>
                     <div className="ham"></div>
-                </div>
+                </button>
                 <a href="/questions"><div className="heading">
                     <img className="logoimg" src="images/logo.png" alt="logo"></img>
                 </div></a>
@@ -48,12 +55,24 @@ function Header() {
                 <button className="signupBtn"><Link className='linkSignup' to='/Signup'>Sign up</Link></button>
             </div>)}
             {user&&(
-                <div>
+                <div className="buttonlogDiv">
                 <span> {user.email}</span><span>  </span>
                 <button className="signupBtn" onClick={logOut}>Log Out</button>
                 </div>
            )}
             </div>
+            <div id="myDropdown" className="leftdiv">
+             <div className="homelink">
+                 <a href="/questions">Home</a>
+             </div>
+             <span className="public">PUBLIC</span>
+             <div className="publicLink">
+                 <a href="/questions">
+                     <span> Questions</span></a>
+                 <a href="/tag">Tags</a>
+                 <a href="/user">Users</a>
+             </div>
+         </div>
         </div>
     )
 }
