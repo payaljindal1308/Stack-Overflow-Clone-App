@@ -18,28 +18,36 @@ html{
 .leftdiv a{
    text-decoration: none;
    color: rgb(122,127,133);
-   margin-top: 20px;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 
 .leftdiv a:focus{
     background-color: rgb(241,242,243);
-    border-right: 2px solid orangered;
+    border-right: 2px solid rgb(250, 133, 23);
     color: black;
 }
 
 
 .homelink{
     margin-top: 30px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 150px;
-    height: 30px;
+    padding: 10px;
     background-color: rgb(241,242,243);
-    border-right: 2px solid orangered;
+    border-right: 2px solid rgb(250, 133, 23);
+}
+
+
+.homelink a{
+    color: black;
+    width: 150px;
 }
 
 
 .public{
     margin-top: 50px;
+    margin-left: 10px;
 }
 
 
@@ -98,6 +106,8 @@ html{
     float: left;
     padding: 30px;
 }
+
+
 .allQuediv a:hover{
     cursor: pointer;
     font-weight: bold;

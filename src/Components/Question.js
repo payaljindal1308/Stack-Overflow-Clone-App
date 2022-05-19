@@ -15,12 +15,10 @@ import MyEditor from "./Editor/MyEditor";
 
 function Question() {
     const { id } = useParams();
-    const [answer, setAnswer] = useState('');
     const [questions, setquestions] = useState([]);
     const [question, setquestion]= useState('');
     const navigate = useNavigate();
-
-
+    const [editorText,setEditorText]=useState('');
     useEffect(() => {
         const q = query(collection(db, 'Questions'))
         onSnapshot(q, (querySnapshot) => {
@@ -41,7 +39,7 @@ function Question() {
     function postAnswer(ev) {
       ev.preventDefault();
       try {
-        sendAnswer(question.data.answers, answer, id)
+        sendAnswer(question.data.answers, editorText, id)
             .then(_ => {
            navigate(`/question/${id}`)
             })
@@ -50,7 +48,9 @@ function Question() {
         console.log(err)
     }
     }
-console.log(question)
+    const setTextEditorValue=(textValue)=>{
+      setEditorText(textValue);
+    }
     return (
      
         <>
@@ -90,8 +90,7 @@ console.log(question)
                     <div className="addAns">
                     <p>Know someone who can answer? Share a link to this</p>
                         <h1>Your Answer</h1>
-                        <textarea></textarea> 
-                        <MyEditor></MyEditor>
+                        <MyEditor setTextEditorValue={setTextEditorValue} ></MyEditor>
                         <button className='reviewBtn' onClick={postAnswer}>Post Your Answer</button>
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 body{
-    font-family: var(--ff-sans);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background-color: rgb(255,255,255);
 }
 .navbar{
@@ -8,6 +8,7 @@ body{
     background-color: rgb(248,249,249);
     padding: 2px;
     border-bottom: 1px solid rgb(228, 217, 217);
+    border-top: 3px solid rgb(250, 133, 23);
 }
 
 .hamdiv{
@@ -32,25 +33,29 @@ body{
 
 .webname{
     font-size: 20px;
-    margin-left: 10px;
-    margin-top: 7px;
+    margin-top: 12px;
 }
 
+
 .searchTab{
+    padding: 5px;
     margin-left: 20px;
     width: 40%;
-}
-
-.searchTab{
     border: 1px solid rgb(196, 188, 188);
-    height: 30px;
+    height: 25px;
     color: rgb(148, 140, 140);
     border-radius: 4px;
+    align-self: center;
 }
 
 .buttonDiv{
     margin-left: 10px;
     width: 180px;
+}
+
+.buttonlogDiv{
+    margin-left: 10px;
+    width: 250px;
 }
 
 .loginBtn{
@@ -95,5 +100,11 @@ body{
 @media only screen and (max-width: 700px) {
     .webname{
         display: none;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) and (min-width:700px){
+    .searchTab{
+        width: 20%;
     }
   }

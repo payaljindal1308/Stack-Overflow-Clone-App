@@ -7,9 +7,10 @@ import '../../../node_modules/draft-js/dist/Draft.css';
       class MyEditor extends React.Component {
         constructor(props) {
           super(props);
-          this.state = {editorState: EditorState.createEmpty()};
+          this.state = {editorState: EditorState.createEmpty(), editorText:props.editorText};
           this.focus = () => this.refs.editor.focus();
           this.onChange = (editorState) => {this.setState({editorState})
+            props.setTextEditorValue(editorState.getCurrentContent().getPlainText('\u0001'))
         }
           this.handleKeyCommand = this._handleKeyCommand.bind(this);
           this.mapKeyToEditorCommand = this._mapKeyToEditorCommand.bind(this);

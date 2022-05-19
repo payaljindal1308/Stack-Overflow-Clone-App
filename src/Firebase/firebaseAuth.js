@@ -1,7 +1,7 @@
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
+import { query, collection, onSnapshot } from 'firebase/firestore'
 
 import {
     GoogleAuthProvider,
@@ -13,9 +13,7 @@ import {
 } from "firebase/auth";
 import{
     getFirestore,
-    query,
     getDocs,
-    collection,
     where,
     addDoc,
     setDoc,
@@ -89,31 +87,48 @@ const logInWithEmailAndPassword = async (email, password) => {
   };
 
 
-  const sendQuestion = async(title, body, name, email, id, questions) => {
+  const sendQuestion = async(title, body, email, id, questions, tags, userpersonaltags, usertags) => {
     try {
       await addDoc(collection(db, "Questions"), {
         Title: title,
         Body: body,
         Author: email,
         email: email,
-        answers: []
-      });
-
-      console.log("Successful Addition of Question")
-    } catch (err) {
-      throw err
-    }
-    try{
-      const updateref = doc(db,"Users",id)
-      await setDoc(updateref,{
-        questions: [...questions, {
-          Title: title,
-          Body: body,
-          answers: []}]
+        answers: [],
+        //tags: usertags
       })
-    } catch (err) {
+      .then((docid) => {
+        const updateref = doc(db,"Users",id)
+        updateDoc(updateref,{
+        questions: [...questions, {id: docid}],
+        //tags: [...new Set([...userpersonaltags, usertags])]
+      })
+      // .then(() => {
+      //    tags.forEach(tag => {
+      //      updateDoc(db,"Tags",tag.id,{
+      //        [tag.questions]: [...tag.questions, {id: docid}]
+      //      })
+      //    })
+      //   })
+       })
+       console.log("Successful Addition of Question")
+       }
+      
+      
+    catch (err) {
       throw err
     }
+    // try{
+    //   const updateref = doc(db,"Users",id)
+    //   await setDoc(updateref,{
+    //     questions: [...questions, {
+    //       Title: title,
+    //       Body: body,
+    //       answers: []}]
+    //   })
+    // } catch (err) {
+    //   throw err
+    // }
     }
 
     const sendAnswer = async(answers,answer, questionid) => {

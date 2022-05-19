@@ -112,7 +112,10 @@
     border-radius: 4px;
 }
 
-
+.reviewBtn:hover{
+    cursor: pointer;
+    background-color: rgb(11, 110, 185);
+}
 @media only screen and (max-width: 800px) {
     .steps {
       display: none;

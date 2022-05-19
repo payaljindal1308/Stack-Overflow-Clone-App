@@ -4,7 +4,6 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Firebase/firebaseAuth';
 import { collection, query, onSnapshot } from "firebase/firestore"
 import { sendQuestion } from '../Firebase/firebaseAuth';
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../Firebase/firebaseAuth';
 import '../Styles/AskQue.css'
@@ -14,11 +13,17 @@ import MyEditor from './Editor/MyEditor';
 function AskPage() {
   const [user, setUser] = useState('')
   const [title, setTitle] = useState('');
-  const [body, setBody] = useState('');
   const [users, setusers] = useState([]);
   const [questions, setquestions] = useState([]);
   const [id, setid] = useState('');
   const navigate = useNavigate();
+  const [editorText,setEditorText]=useState('');
+  //const [usertags,setUsertags] = useState('');
+  //const [tags, setTags] = useState([]);
+  //const [dbtags, setDbtags] = useState([]);
+  //const [newTags, setNewtags] = useState([]);
+  //const [userpersonaltags, setuserpersonaltags] = useState([]);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser)
@@ -30,16 +35,23 @@ function AskPage() {
         data: doc.data()
       })))
     })
-    return () => {
-      unsubscribe();
-    }
+    // const qtag = query(collection(db, 'Tags'))
+    // onSnapshot(qtag, (querySnapshot) => {
+    //   setDbtags(querySnapshot.docs.map(doc => ({
+    //     id: doc.id,
+    //     data: doc.data()
+    //   })))
+    // })
+    // return () => {
+    //   unsubscribe();
+    // }
   }, [])
 
 
   useEffect(() => {
     if (id) {
       try {
-        sendQuestion(title, body, user.displayName, user.email, id, questions)
+        sendQuestion(title, editorText, user.email, id, questions)
           .then(_ => {
             navigate('/questions')
           })
@@ -52,14 +64,30 @@ function AskPage() {
 
 
   async function postQuestion(ev) {
+    ev.preventDefault();
     users.forEach(element => {
       if (element.data.email === user?.email) {
-        console.log('exectued');
+        console.log('executed');
         setid(element.id)
         setquestions(element.data.questions ? element.data.questions : [])
+        //setuserpersonaltags(element.data.tags? element.data.tags: [])
       }
     })
+
+    // usertags.forEach(tag => {
+    //   setTags([...tags], dbtags.filter(dbtag => {
+    //     if(dbtag.data.name === tag)
+    //     {
+    //       return {id: dbtag.id, questions: dbtag.questions}
+    //     }
+    //   }))
+    // })
   }
+  const setTextEditorValue=(textValue)=>{
+    setEditorText(textValue);
+  }
+
+  // console.log(dbtags)
   
   return (
     <div>
@@ -72,7 +100,7 @@ function AskPage() {
             <input type="text" onChange={(e) => setTitle(e.target.value)} defaultValue={title}></input>
             <h1>Body</h1>
             <p>Include all the information someone would need to answer your question</p>
-            <MyEditor></MyEditor>
+            <MyEditor setTextEditorValue={setTextEditorValue} ></MyEditor>
             <h1>Tags</h1>
             <p>Add up to 5 tags to describe what your question is about</p>
             <input type="text" defaultValue="e.g. (wordpress r css)"></input>
@@ -101,11 +129,10 @@ function AskPage() {
           </div>
         </div>
         <div className='reviewBtnDiv'>
-          <button className='reviewBtn' onClick={postQuestion}>Review your question</button>
+          <button className='reviewBtn' onClick={postQuestion}>Post your question</button>
         </div>
       </div>
     </div>
-
   )
 }
 
