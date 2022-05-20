@@ -54,9 +54,9 @@ export const Login = () => {
     return (
         <>
         <div className="loginContainer">
-            <div className="logoImgDiv"><img src="images/logo.png" alt="img"></img></div>
+            <div className="logoImgDiv"><img src="./images/logo.png" alt="img"></img></div>
             <button className="inputField"  onClick={signinWithGoogle}>
-                <img src="images/googleLogo1.png" alt="googleimg"></img>
+                <img src="./images/googleLogo1.png" alt="googleimg"></img>
                 <span> Log in with Google</span></button>
             <form className="formField">
                 <label>Email</label>

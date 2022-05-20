@@ -4,7 +4,7 @@ import "../Styles/SideNav.css"
      return (
          <div className="leftdiv">
              <div className="homelink">
-                 <a href="/questions">Home</a>
+                 <a href="/home">Home</a>
              </div>
              <span className="public">PUBLIC</span>
              <div className="publicLink">

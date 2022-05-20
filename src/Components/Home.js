@@ -7,8 +7,7 @@ import '../Styles/Question.css'
 import SideNav from "./SideNav";
 
 
-function Questions(){
-
+function Home(){
 const [questions, setquestions] = useState([])
 const [Questions, setQuestions] = useState([])
 useEffect(() => {
@@ -20,10 +19,9 @@ useEffect(() => {
       timestamp: doc._document.version.timestamp.seconds
     })))
   })
-  
 },[])
 useEffect(() => {
-    setQuestions(questions.sort((a,b) => b.timestamp - a.timestamp))
+    setQuestions(questions.sort((a,b) => b.data.upvotes - a.data.upvotes))
 })
     return (
         
@@ -32,7 +30,7 @@ useEffect(() => {
                 <SideNav></SideNav>
                 <div className="midDiv">
                     <div className="topque">
-                        <span>All Questions</span>
+                        <span>Top Questions</span>
                         <button className="askQueBtn">
                             <Link className="linkSignup" to='/askPage'>Ask Question</Link>
                         </button>
@@ -76,4 +74,4 @@ useEffect(() => {
     )
 }
 
-export default Questions
+export default Home

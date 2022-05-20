@@ -40,13 +40,13 @@ function Header() {
     return (
         <div>
             <div className="navbar">
-                <button className="hamdiv" onclick={myFunction}>
+                <button className="hamdiv" onClick={myFunction}>
                     <div className="ham"></div>
                     <div className="ham"></div>
                     <div className="ham"></div>
                 </button>
                 <a href="/questions"><div className="heading">
-                    <img className="logoimg" src="images/logo.png" alt="logo"></img>
+                    <img className="logoimg" src="./images/logo.png" alt="logo"></img>
                 </div></a>
                 <span className="webname">stack <b> overflow clone</b></span>
                 <input className="searchTab"></input>

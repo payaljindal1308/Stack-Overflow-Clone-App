@@ -25,7 +25,7 @@ function Question() {
     const navigate = useNavigate();
     const [editorText,setEditorText]=useState('');
     const [users, setUsers] = useState([])
-    
+    const [user, setUser] = useState('');
 
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
@@ -48,6 +48,11 @@ function Question() {
 
 
     useEffect(() => {
+        setUser(users.find(user => user.data.email === currentUser.email))
+    },[users])
+
+
+    useEffect(() => {
       setquestion(questions.find(question => question.id === id))
     },[questions])
 
@@ -57,9 +62,8 @@ function Question() {
       {
       try{
     ev.preventDefault();
-    const user = users.find(user => user.data.email === currentUser.email)
     const questions = user.data.questions.filter(questionid => questionid !== question.id)
-    deleteQuestionFromDB(question.id, user.id, questions).then(() => navigate('/questions'))
+    deleteQuestionFromDB(question.id, user.id, questions, question.data.tags).then(() => navigate('/questions'))
       }
       catch(err){
           console.log(err)
@@ -104,7 +108,6 @@ function Question() {
     }
     
     const questionUpvoteHandler =async(ev) => {
-        const user = users.find(user => user.data.email === currentUser.email)
         if(user.data.upvotes - user.data.downvotes >= 5){
         try{
         if(question.id, question.data.upvotes)
@@ -121,12 +124,14 @@ function Question() {
             }
       })
     }
+    else{
+        alert("You have less than 5 reputation!!")
+    }
 }
 
 
     const questionDownvoteHandler = async(ev) => {
         ev.preventDefault();
-        const user = users.find(user => user.data.email === currentUser.email)
         if(user.data.upvotes - user.data.downvotes >= 5){
         try{
             if(question.id, question.data.downvotes)
@@ -142,11 +147,13 @@ function Question() {
                 }
           })
     }
+    else{
+        alert("You have less than 5 reputation!!")
+    }
 }
 
 
     const answerUpvoteHandler = async(answer, index) => {
-        const user = users.find(user => user.data.email === currentUser.email)
         if(user.data.upvotes - user.data.downvotes >= 5){
         try{
         const user = users.find(user => user.data.email === answer.email)
@@ -167,7 +174,6 @@ function Question() {
 
 
 const answerDownvoteHandler = async(answer, index) => {
-    const user = users.find(user => user.data.email === currentUser.email)
     if(user.data.upvotes - user.data.downvotes >= 5){
     try{
     const user = users.find(user => user.data.email === answer.email)
@@ -179,6 +185,9 @@ const answerDownvoteHandler = async(answer, index) => {
     const answers = question.data.answers;
     answers[index].downvotes -= 1;
     await changeAnswers(question.id, answers)
+}
+else{
+    alert("You have less than 5 reputation!!")
 }
 }
 
@@ -201,9 +210,9 @@ const answerDownvoteHandler = async(answer, index) => {
                     </div>
                     <div className="queBody">
                         <div className="votes">
-                            <button onClick={questionUpvoteHandler}><img src="images/upvote.jpeg"></img></button>
+                            <button onClick={questionUpvoteHandler}><img  src="../images/upvote.jpeg"></img></button>
                             <div className="calVotes">{question?.data?.upvotes - Math.abs(question?.data?.downvotes)}</div>
-                            <button onClick={questionDownvoteHandler}><img src="images/downvote.png"></img></button>
+                            <button onClick={questionDownvoteHandler}><img src="../images/downvote.png"></img></button>
                         </div>
                         <div className="ansBody">
                             <p>{question?.data?.Body}</p>
@@ -222,9 +231,9 @@ const answerDownvoteHandler = async(answer, index) => {
                     {question?.data?.answers.map((answer, index) => (
                         <div key={answer.body} className="allAns">
                             <div>
-                                <button onClick={()=> answerUpvoteHandler(answer, index)}><img src="images/upvote.jpeg"></img></button>
+                                <button onClick={()=> answerUpvoteHandler(answer, index)}><img src="../images/upvote.jpeg"></img></button>
                                 <div className="calVotes">{answer.upvotes - Math.abs(answer.downvotes)}</div>
-                                <button onClick={() => answerDownvoteHandler(answer, index)}><img src="images/downvote.png"></img></button>
+                                <button onClick={() => answerDownvoteHandler(answer, index)}><img src="../images/downvote.png"></img></button>
                             </div>
                             <div className="ansBody">
                                 <p>{answer.body}</p>

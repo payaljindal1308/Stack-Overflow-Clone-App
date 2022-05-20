@@ -51,7 +51,8 @@ const firebaseConfig = {
                 email: user.email,
                 questions: [],
                 upvotes: 0,
-                downvotes: 0
+                downvotes: 0,
+                tags: []
               });
           }
         return res;
@@ -83,7 +84,8 @@ const logInWithEmailAndPassword = async (email, password) => {
         email,
         questions: [],
         upvotes: 0,
-        downvotes: 0
+        downvotes: 0,
+        tags: []
       });
       console.log("Successful sign in")
     } catch (err) {
@@ -92,8 +94,9 @@ const logInWithEmailAndPassword = async (email, password) => {
   };
 
 
-  const sendQuestion = async(title, body, email, id, questions, tags, userpersonaltags, usertags) => {
+  const sendQuestion = async(title, body, email, id, questions, selectedtags, usertags, dbtags) => {
     try {
+      console.log("DB sendquestion")
       await addDoc(collection(db, "Questions"), {
         Title: title,
         Body: body,
@@ -101,23 +104,26 @@ const logInWithEmailAndPassword = async (email, password) => {
         email: email,
         answers: [],
         upvotes: 0,
-        downvotes: 0
-        //tags: usertags
+        downvotes: 0,
+        tags: selectedtags
       })
       .then((docid) => {
         const updateref = doc(db,"Users",id)
         updateDoc(updateref,{
-        questions: [...questions, docid],
-        //tags: [...new Set([...userpersonaltags, usertags])]
+        questions: [...questions, docid._key.path.segments[1]],
+        tags: usertags
       })
-      // .then(() => {
-      //    tags.forEach(tag => {
-      //      updateDoc(db,"Tags",tag.id,{
-      //        [tag.questions]: [...tag.questions, {id: docid}]
-      //      })
-      //    })
-      //   })
-       })
+      return docid._key.path.segments[1]
+    })
+      .then((docid) => {
+        console.log(docid)
+        const tagstoupdate = dbtags.filter(tag => selectedtags.indexOf(tag) < 0 )
+         tagstoupdate.forEach(tag => {
+           updateDoc(doc(db,"Tags",tag.id),{
+             questions: [...tag.data.questions, docid]
+           }).then(()=>"Tag updated")
+         })
+        })
        console.log("Successful Addition of Question")
        }
       
@@ -125,17 +131,6 @@ const logInWithEmailAndPassword = async (email, password) => {
     catch (err) {
       throw err
     }
-    // try{
-    //   const updateref = doc(db,"Users",id)
-    //   await setDoc(updateref,{
-    //     questions: [...questions, {
-    //       Title: title,
-    //       Body: body,
-    //       answers: []}]
-    //   })
-    // } catch (err) {
-    //   throw err
-    // }
     }
 
     const sendAnswer = async(answers,answer, questionid, email) => {
@@ -192,13 +187,28 @@ const logInWithEmailAndPassword = async (email, password) => {
       })
     }
 
-    const deleteQuestionFromDB = async(qid, uid, questions) => {
-      console.log("Delete question called")
+    const deleteQuestionFromDB = async(qid, uid, questions, questiontags) => {
+      console.log("Delete question called", qid,questions)
       await deleteDoc(doc(db, "Questions", qid));
       const updateref = doc(db,"Users",uid)
       await updateDoc(updateref,{
       questions: questions
-    })
+    }).then(() => {
+      const q = query(collection(db, 'Tags'))
+        onSnapshot(q, (querySnapshot) => {
+            const tags = querySnapshot.docs.map(doc => ({
+                id: doc.id,
+                data: doc.data()
+            }))
+            const tagstoupdate = tags.filter(tag => questiontags.indexOf(tag) < 0 )
+            tagstoupdate.forEach(tag => {
+              updateDoc(doc(db,"Tags",tag.id),{
+                questions: tag.data.questions.filter(question => question !== qid)
+              }).then(()=>"Tag updated")
+            })
+           })
+          console.log("Successful Deletion of Question")
+          })
     }
 
   // const sendPasswordReset = async (email) => {

@@ -12,21 +12,22 @@ import MyEditor from './Editor/MyEditor';
 
 function AskPage() {
   const [user, setUser] = useState('')
+  const [currentUser, setCurrentUser] = useState('');
   const [title, setTitle] = useState('');
   const [users, setusers] = useState([]);
   const [questions, setquestions] = useState([]);
   const [id, setid] = useState('');
   const navigate = useNavigate();
   const [editorText,setEditorText]=useState('');
-  //const [usertags,setUsertags] = useState('');
-  //const [tags, setTags] = useState([]);
-  //const [dbtags, setDbtags] = useState([]);
+  const [usertags,setUsertags] = useState('');
+  const [selectedtags, setSelectedtags] = useState(['css','html']);
+  const [dbtags, setDbtags] = useState([]);
   //const [newTags, setNewtags] = useState([]);
   //const [userpersonaltags, setuserpersonaltags] = useState([]);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser)
+      setCurrentUser(currentUser)
     })
     const q = query(collection(db, 'Users'))
     onSnapshot(q, (querySnapshot) => {
@@ -35,58 +36,80 @@ function AskPage() {
         data: doc.data()
       })))
     })
-    // const qtag = query(collection(db, 'Tags'))
-    // onSnapshot(qtag, (querySnapshot) => {
-    //   setDbtags(querySnapshot.docs.map(doc => ({
-    //     id: doc.id,
-    //     data: doc.data()
-    //   })))
-    // })
-    // return () => {
-    //   unsubscribe();
-    // }
+    const qtag = query(collection(db, 'Tags'))
+    onSnapshot(qtag, (querySnapshot) => {
+      setDbtags(querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        data: doc.data()
+      })))
+    })
   }, [])
 
 
   useEffect(() => {
-    if (id) {
-      try {
-        sendQuestion(title, editorText, user.email, id, questions)
-          .then(_ => {
-            navigate('/questions')
-          })
-      }
-      catch (err) {
-        console.log(err)
-      }
-    }
-  }, [id, navigate]);
+    setUser(users.find(user => user.data.email === currentUser.email))
+},[users])
+
+
+  // useEffect(() => {
+  //   if (id) {
+  //     try {
+  //       console.log("ids ")
+  //       const user = users.find(user => user.data.email === currentUser.email)
+  //       console.log(user)
+  //       const userTags = user?.data?.tags?.reduce((acc, tag) => ({...acc, [tag]: 1}),{})
+  //       console.log(userTags)
+  //       const usertags = selectedtags.filter(tag => userTags[tag]? '': tag)
+  //       console.log(selectedtags,usertags,)
+  //       sendQuestion(title, editorText, currentUser.email, id, questions, selectedtags, usertags, dbtags)
+  //         .then(_ => {
+  //           navigate('/questions')
+  //         })
+  //     }
+  //     catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
+  // }, [id, navigate]);
 
 
   async function postQuestion(ev) {
-    ev.preventDefault();
-    users.forEach(element => {
-      if (element.data.email === user?.email) {
-        console.log('executed');
-        setid(element.id)
-        setquestions(element.data.questions ? element.data.questions : [])
-        //setuserpersonaltags(element.data.tags? element.data.tags: [])
-      }
-    })
-
-    // usertags.forEach(tag => {
-    //   setTags([...tags], dbtags.filter(dbtag => {
-    //     if(dbtag.data.name === tag)
-    //     {
-    //       return {id: dbtag.id, questions: dbtag.questions}
-    //     }
-    //   }))
+    ev.preventDefault()
+    console.log("Post Called")
+    try {
+      console.log("ids ")
+      const user = users.find(user => user.data.email === currentUser.email)
+      console.log(user.data)
+      const userTags = user?.data?.tags?.reduce((acc, tag) => ({...acc, [tag]: 1}),{})
+      console.log(userTags)
+      const usertags = selectedtags.filter(tag => userTags[tag]? '': tag)
+      console.log(selectedtags,usertags,)
+      sendQuestion(title, editorText, currentUser.email, user.id, user.data.questions, selectedtags, usertags, dbtags)
+        .then(_ => {
+          navigate('/questions')
+        })
+    }
+    catch (err) {
+      console.log(err)
+    }
+    // console.log("Post called")
+    // users.forEach(element => {
+    //   if (element.data.email === currentUser.email) {
+    //     console.log('executed');
+    //     setid(element.id)
+    //     setquestions(element.data.questions ? element.data.questions : [])
+    //     //setuserpersonaltags(element.data.tags? element.data.tags: [])
+    //   }
     // })
+   
   }
+
+
   const setTextEditorValue=(textValue)=>{
     setEditorText(textValue);
   }
 
+  
   // console.log(dbtags)
   
   return (
@@ -103,7 +126,7 @@ function AskPage() {
             <MyEditor setTextEditorValue={setTextEditorValue} ></MyEditor>
             <h1>Tags</h1>
             <p>Add up to 5 tags to describe what your question is about</p>
-            <input type="text" defaultValue="e.g. (wordpress r css)"></input>
+            <input type="text" defaultValue="e.g. (wordpress r css)" ></input>
           </div>
           <div className='steps'>
             <div className='stepHeading'>Step 1: Draft your question</div>

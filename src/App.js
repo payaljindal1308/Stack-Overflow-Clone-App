@@ -15,6 +15,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase/firebaseAuth';
 import Tags from './Components/Tags';
 import ProtectedRoutes from './Components/ProtectedRoutes';
+import Home from './Components/Home';
 function App() {
   const [user,setUser] = useState('');
   useEffect(() =>  async function(){
@@ -34,6 +35,7 @@ function App() {
     <Route path="/" element={<Login/>}></Route>
     <Route path="/signup" element={<SignUp/>}></Route>
     <Route path="/reset" element={<Reset/>}></Route>
+    <Route path="/home" element={<ProtectedRoutes><Home/></ProtectedRoutes>}></Route>
     <Route path="/user" element={<ProtectedRoutes><UserPage/></ProtectedRoutes>}></Route>
     <Route path="/question/:id" element={<ProtectedRoutes><Question/></ProtectedRoutes>}></Route>
     <Route path="/questions" element={<ProtectedRoutes><Questions/></ProtectedRoutes>}></Route>
