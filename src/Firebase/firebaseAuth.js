@@ -116,8 +116,9 @@ const logInWithEmailAndPassword = async (email, password) => {
       return docid._key.path.segments[1]
     })
       .then((docid) => {
-        console.log(docid)
-        const tagstoupdate = dbtags.filter(tag => selectedtags.indexOf(tag) < 0 )
+        console.log(docid, selectedtags)
+        const tagstoupdate = dbtags.filter(tag => selectedtags.indexOf(tag.data.name) >= 0 )
+        console.log(tagstoupdate)
          tagstoupdate.forEach(tag => {
            updateDoc(doc(db,"Tags",tag.id),{
              questions: [...tag.data.questions, docid]

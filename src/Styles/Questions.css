@@ -46,6 +46,7 @@ html{
     display: flex;
     flex-direction: column;
     border-top: 1px solid rgb(211, 205, 205);
+    text-align: left;
 }
 
 
@@ -54,12 +55,26 @@ html{
     color: rgb(16, 121, 202);
     float: left;
     padding: 30px;
+    padding-bottom: 10px;
 }
 
+.queTag{
+    margin-left: 25px;
+    padding-bottom: 20px;
+}
+
+.queTag button{
+    border: none;
+    margin: 3px;
+    color: rgb(57, 165, 247);
+    background-color: rgba(195, 195, 241, 0.548);
+    border-radius: 4px;
+
+}
 
 .allQuediv a:hover{
     cursor: pointer;
-    font-weight: bold;
+    color: rgb(6, 86, 110);
 }
 
 .rightdiv{

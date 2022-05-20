@@ -4,6 +4,7 @@ import SideNav from "./SideNav";
 import { query, collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../Firebase/firebaseAuth'
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 function Tags(){
 
 
@@ -27,8 +28,8 @@ useEffect(() => {
                     {dbtags.map((tag, index) => ( 
                     <div className='tagName'>
                         <div className='userImg'></div>
-                        <div className='userName'>
-                            <div>{tag.data.name}</div>
+                        <div  className='userName'>
+                            <Link className='userNameink' to={`/tag/${tag.data.name}`}><div>{tag.data.name}</div></Link>
                         </div>
                     </div>
                      )) }

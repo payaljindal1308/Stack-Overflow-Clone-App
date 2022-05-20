@@ -39,10 +39,15 @@
 
 }
 
-.userName{
-    margin: 20px;
-
+.userLink{
+    text-decoration: none;
+    color: rgb(53, 153, 235);
 }
+
+.userame{
+    margin: 20px;
+}
+
 
 @media only screen and (max-width: 1000px) {
     .users input{

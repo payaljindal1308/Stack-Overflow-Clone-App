@@ -31,6 +31,11 @@ function Header() {
         }
       }
 
+      const searchHandler = (ev) => {
+          if(ev.key === 'Enter'){
+            navigate(`/tag/${ev.target.value}`)
+          }
+      }
 
       function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
@@ -49,7 +54,8 @@ function Header() {
                     <img className="logoimg" src="./images/logo.png" alt="logo"></img>
                 </div></a>
                 <span className="webname">stack <b> overflow clone</b></span>
-                <input className="searchTab"></input>
+                <input className="searchTab" onKeyDown={searchHandler}></input>
+                
                 {!user&&(<div className="buttonDiv">
                 <button className="loginBtn"><Link className='linkLogin' to='/'>Log in</Link></button>
                 <button className="signupBtn"><Link className='linkSignup' to='/Signup'>Sign up</Link></button>

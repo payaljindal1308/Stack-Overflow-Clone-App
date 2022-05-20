@@ -37,13 +37,12 @@ useEffect(() => {
                     </div>
                     <div>
                         {
-                            Questions.map(que => {
-                                
+                            Questions.map(que => {                                
                                 return <div key={que.id} className="allQuediv">
-                                        <div>
-                                            <Link to={`/question/${que.id}`}>{que.data.Title}</Link>
-                                            {que?.data?.tags?.map(tag => (
-                                                <p key={tag}>{tag}</p>
+                                        <div><Link to={`/question/${que.id}`}>{que.data.Title}</Link></div>
+                                            <div className="queTag">
+                                                {que?.data?.tags?.map(tag => (
+                                                <button key={tag}>{tag}</button>
                                             ))}
                                         </div>
                                         <div></div>
@@ -56,7 +55,7 @@ useEffect(() => {
                     <div className="rightDivHeading">The Overflow Blog</div>
                     <div className="rightDivexp">
                         <p>Software is adopted, not sold</p>
-                        <p>An unfiltered look back at Aprail Fools' 2022</p>
+                        <p>An unfiltered look back at April Fools' 2022</p>
                     </div>
                     <div className="rightDivHeading">Featured on Meta</div>
                     <div className="rightDivexp">

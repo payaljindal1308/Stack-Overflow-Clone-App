@@ -5,7 +5,7 @@ import { logout } from '../Firebase/firebaseAuth';
 import {collection, query, onSnapshot} from "firebase/firestore"
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../Firebase/firebaseAuth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../Styles/User.css"
 import SideNav from './SideNav';
 
@@ -42,14 +42,15 @@ users.map(element => {
         <h1>Users</h1>
         <input type="text" placeholder='Filter by user'></input>
         <div className='userDiv'>
-          {users.map((user, index) => (
+        {users.map((user, index) => (
+            <Link className='userLink' to={`/user/${user.id}`}>
             <div key={index} className='userDetail'>
-              <div className='userImg'><img alt='userimg' src='images/user.png'></img></div>
-              <div className='userName'>
+              <div className='userImg'><img alt='userimg' src='../images/user.png'></img></div>
+              <div className='userame'>
                 <div>{user.data.name}</div>
                 <div>{user.data.email}</div>
               </div>
-            </div>
+            </div></Link>
           ))
           }
         </div>

@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../Firebase/firebaseAuth';
 import '../Styles/AskQue.css'
 import MyEditor from './Editor/MyEditor';
+import Select from 'react-select';
 
 
 function AskPage() {
@@ -20,11 +21,9 @@ function AskPage() {
   const navigate = useNavigate();
   const [editorText,setEditorText]=useState('');
   const [usertags,setUsertags] = useState('');
-  const [selectedtags, setSelectedtags] = useState(['css','html']);
+  const [selectedtags, setSelectedtags] = useState([]);
   const [dbtags, setDbtags] = useState([]);
-  //const [newTags, setNewtags] = useState([]);
-  //const [userpersonaltags, setuserpersonaltags] = useState([]);
-
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setCurrentUser(currentUser)
@@ -51,28 +50,6 @@ function AskPage() {
 },[users])
 
 
-  // useEffect(() => {
-  //   if (id) {
-  //     try {
-  //       console.log("ids ")
-  //       const user = users.find(user => user.data.email === currentUser.email)
-  //       console.log(user)
-  //       const userTags = user?.data?.tags?.reduce((acc, tag) => ({...acc, [tag]: 1}),{})
-  //       console.log(userTags)
-  //       const usertags = selectedtags.filter(tag => userTags[tag]? '': tag)
-  //       console.log(selectedtags,usertags,)
-  //       sendQuestion(title, editorText, currentUser.email, id, questions, selectedtags, usertags, dbtags)
-  //         .then(_ => {
-  //           navigate('/questions')
-  //         })
-  //     }
-  //     catch (err) {
-  //       console.log(err)
-  //     }
-  //   }
-  // }, [id, navigate]);
-
-
   async function postQuestion(ev) {
     ev.preventDefault()
     console.log("Post Called")
@@ -92,15 +69,6 @@ function AskPage() {
     catch (err) {
       console.log(err)
     }
-    // console.log("Post called")
-    // users.forEach(element => {
-    //   if (element.data.email === currentUser.email) {
-    //     console.log('executed');
-    //     setid(element.id)
-    //     setquestions(element.data.questions ? element.data.questions : [])
-    //     //setuserpersonaltags(element.data.tags? element.data.tags: [])
-    //   }
-    // })
    
   }
 
@@ -109,8 +77,34 @@ function AskPage() {
     setEditorText(textValue);
   }
 
-  
-  // console.log(dbtags)
+  const options = [
+    {value:'typescript', label: 'typescript'},
+    {value:'php', label: 'php'},
+    {value:'jquery', label: 'jquery'},
+    {value:'java', label: 'java'},
+    {value:'vs code', label:'vs code'},
+    {value:'nodejs', label: 'node js'},
+    {value:'angular', label: 'angular'},
+    {value:'css', label: 'css'},
+    {value:'google crome', label: 'google crome'},
+    {value:'arrays', label: 'arrays'},
+    {value:'sql', label: 'sql'},
+    {value:'c#', label: 'c#'},
+    {value:'react', label: 'react'},
+    {value:'python', label: 'python'},
+    {value:'javascript', label: 'javascript'},
+    {value:'html', label: 'html'},
+    {value:'c++', label: 'c++'},
+    {value:'aws', label: 'aws'},
+    {value:'android', label: 'android'},
+  ]
+
+
+  const handleOnChange = (tags) => {
+      setSelectedtags(tags.map(tag => tag.value))
+
+  }
+
   
   return (
     <div>
@@ -126,7 +120,8 @@ function AskPage() {
             <MyEditor setTextEditorValue={setTextEditorValue} ></MyEditor>
             <h1>Tags</h1>
             <p>Add up to 5 tags to describe what your question is about</p>
-            <input type="text" defaultValue="e.g. (wordpress r css)" ></input>
+            {/* <input type="text" placeholder="e.g. (wordpress r css)" ></input> */}
+            <Select onChange={handleOnChange} isMulti options={options}></Select>
           </div>
           <div className='steps'>
             <div className='stepHeading'>Step 1: Draft your question</div>

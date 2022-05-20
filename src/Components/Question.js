@@ -262,7 +262,7 @@ else{
                     <div className="rightDivHeading">The Overflow Blog</div>
                     <div className="rightDivexp">
                         <p>Software is adopted, not sold</p>
-                        <p>An unfiltered look back at Aprail Fools' 2022</p>
+                        <p>An unfiltered look back at April Fools' 2022</p>
                     </div>
                     <div className="rightDivHeading">Featured on Meta</div>
                     <div className="rightDivexp">
