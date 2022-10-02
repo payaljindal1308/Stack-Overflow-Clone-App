@@ -1,0 +1,57 @@
+
+.leftdiv{
+    color: rgb(122,127,133);
+    text-align: left;
+    border-right: 1px solid rgb(196, 193, 193);
+}
+
+
+.leftdiv a{
+   text-decoration: none;
+   color: rgb(122,127,133);
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+
+.leftdiv a:focus{
+    background-color: rgb(241,242,243);
+    border-right: 2px solid rgb(250, 133, 23);
+    color: black;
+}
+
+
+.homelink{
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 150px;
+    padding: 10px;
+    background-color: rgb(241,242,243);
+    border-right: 2px solid rgb(250, 133, 23);
+}
+
+
+.homelink a{
+    color: black;
+    width: 150px;
+}
+
+
+.public{
+    margin-top: 50px;
+    margin-left: 10px;
+}
+
+
+.publicLink{
+    display: flex;
+    color: rgb(122,127,133);
+    flex-direction: column;
+    margin-left: 40px;
+}
+
+
+@media only screen and (max-width: 500px){
+    .leftdiv{
+        display: none;
+    }
+  } 

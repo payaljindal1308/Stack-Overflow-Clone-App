@@ -1,0 +1,115 @@
+html{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.mainDiv{
+    display: flex;
+    justify-content: center;
+}
+
+
+.midDiv{
+    width: 40%;
+}
+
+
+.topque{
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+
+
+.askQueBtn{
+    float: right;
+    margin-right: 10px;
+    height: 40px;
+    background-color: rgb(17,148,250);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+
+.askQueBtn:hover{
+    background-color: rgb(16, 121, 202);
+}
+
+
+.topque span{
+    font-size: 30px;
+    float: left;
+    margin-left: 12px;
+}
+
+.allQuediv{
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid rgb(211, 205, 205);
+    text-align: left;
+}
+
+
+.allQuediv a{
+    text-decoration: none;
+    color: rgb(16, 121, 202);
+    float: left;
+    padding: 30px;
+    padding-bottom: 10px;
+}
+
+.queTag{
+    margin-left: 25px;
+    padding-bottom: 20px;
+}
+
+.queTag button{
+    border: none;
+    margin: 3px;
+    color: rgb(57, 165, 247);
+    background-color: rgba(195, 195, 241, 0.548);
+    border-radius: 4px;
+
+}
+
+.allQuediv a:hover{
+    cursor: pointer;
+    color: rgb(6, 86, 110);
+}
+
+.rightdiv{
+    margin-left: 20px;
+    margin-top: 20px;
+   background-color: rgb(253,247,226);
+   border-radius: 10px;
+   border: 1px solid rgb(241,230,189);
+   text-align: left;
+   height: fit-content;
+   width: 300px;
+   margin-right: 20px;
+   font-size: 14px;
+}
+
+.rightDivHeading{
+    border-top: 1px solid rgb(241,230,189);
+    border-bottom: 1px solid rgb(241,230,189);
+    padding: 15px;
+    margin-left: px;
+    color: rgb(112, 98, 99);
+    font-weight: 600;
+}
+
+.rightDivexp{
+    margin-left: 30px;
+    color: rgb(49, 48, 48);
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .rightdiv {
+      display: none;
+    }
+    .midDiv{
+        width: 75%;
+    }
+  }

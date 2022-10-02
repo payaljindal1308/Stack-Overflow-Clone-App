@@ -1,0 +1,142 @@
+.pageOfUser{
+    display: flex;
+    justify-content: center;
+}
+
+.mainUserPage{
+    padding: 20px;
+}
+
+.userHead{
+    display: flex;
+    flex-wrap: wrap;  
+    align-items: center; 
+}
+
+
+.userHead img{
+    width: 130px;
+    margin-right: 20px;
+}
+
+.userHead span{ 
+    font-size: 30px;
+    text-align: left;
+    padding: 30px;
+    padding-left: 0px;
+    width: 600;
+}
+
+
+.describe{
+    display: flex;
+    text-align: left;
+    flex-wrap: wrap;
+}
+
+.stats{
+    width: fit-content;
+    margin-right: 30px;
+}
+
+.stats .h2{
+     font-size: 20px;
+     margin-bottom: 20px;
+     margin-top: 20px;
+}
+
+.userData{
+    padding: 20px;
+    padding-right: 0px;
+    border: 1px solid rgb(202, 199, 199);
+    display: flex;  
+    flex-wrap: wrap; 
+    border-radius: 5px; 
+    width: 200px;
+}
+
+
+
+.allCategory{
+    width: 80px;
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left: 8px;
+}
+
+.allCategory span{
+    font-size: 12px;
+    color: gray;
+}
+
+
+.aboutUser{
+   width: 900px;
+}
+
+
+
+.aboutUser .h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.userQuestion{
+    float: right;
+    text-align: left;
+    margin: 30px;
+    width: 850px;
+}
+
+.userQuestion .h2{
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.queOfUser{
+    width: 95%;
+    border: 1px solid rgb(202, 199, 199);
+    border-radius: 5px;
+
+}
+
+.perQueOfUser{
+    padding: 20px;
+    border-bottom: 1px solid rgb(196, 190, 190);
+}
+
+@media only screen and (max-width: 900px) {
+    .userHead img{
+        width: 110px;
+    }
+    .userHead span{
+        width: 100%;
+    }
+    .stats{
+        width: 100%;
+    }
+    .userData{
+        width: 100%;
+    }
+    .allCategory{
+        width: 15%;
+    }
+  }
+
+  @media only screen and (max-width: 900px){
+      .aboutUser{
+          width: 90%;
+      }
+      .userQuestion{
+        width: 90%;
+    }
+  }
+
+  @media only screen and (max-width: 1300px) and (min-width: 1300px){
+    .userQuestion{
+        width: 600px;
+    }
+}

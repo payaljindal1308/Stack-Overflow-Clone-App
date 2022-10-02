@@ -1,0 +1,56 @@
+.userPage{
+    display: flex;
+    justify-content: center;
+}
+
+.users{
+    text-align: left;
+    padding: 20px;
+    width: 70%;
+}
+
+.users h1{
+    color: rgb(75, 73, 73);
+    font-weight: 400;
+}
+
+.users input{
+    width: 200px;
+    height: 25px;
+    border: 1px solid rgb(182, 180, 180);
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.userDiv{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.userDetail{
+    width: 300px;
+    padding: 10px;
+    display: flex;
+}
+
+.userImg img{
+    width: 60px;
+
+}
+
+.userLink{
+    text-decoration: none;
+    color: rgb(53, 153, 235);
+}
+
+.userame{
+    margin: 20px;
+}
+
+
+@media only screen and (max-width: 1000px) {
+    .users input{
+        width: 300px;
+    }
+  }

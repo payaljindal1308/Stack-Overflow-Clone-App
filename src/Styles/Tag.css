@@ -1,0 +1,26 @@
+.tagpage{
+    display: flex;
+    justify-content: center;
+    text-align: left;
+}
+
+.tagdiv{
+    width: 40%;
+}
+
+.tagHead{
+    padding: 40px;
+    font-size: 30px;
+}
+
+.tagque{
+    padding: 30px;
+    border-top: 1px solid rgb(196, 191, 191);
+    color: rgb(43, 42, 42);
+}
+
+@media only screen and (max-width: 1000px) {
+    .tagdiv{
+        width: 75%;
+    }
+  }

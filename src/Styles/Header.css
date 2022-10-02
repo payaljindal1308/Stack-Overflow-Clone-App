@@ -1,0 +1,126 @@
+body{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: rgb(255,255,255);
+}
+.navbar{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(248,249,249);
+    padding: 2px;
+    border-bottom: 1px solid rgb(228, 217, 217);
+    border-top: 3px solid rgb(250, 133, 23);
+}
+
+.hamdiv{
+    display: none;
+    border: none;
+}
+.ham{
+    width: 15px;
+  height: 2px;
+  background-color: rgb(70, 65, 65);
+  margin: 3px;
+}
+
+
+
+.logoimg{
+    width: 40px;
+    margin-top: 5px;
+}
+
+.webname{
+    font-size: 20px;
+    margin-top: 12px;
+}
+
+
+.searchTab{
+    padding: 5px;
+    margin-left: 20px;
+    width: 40%;
+    border: 1px solid rgb(196, 188, 188);
+    height: 25px;
+    color: rgb(148, 140, 140);
+    border-radius: 4px;
+    align-self: center;
+}
+
+.buttonDiv{
+    margin-left: 10px;
+    width: 180px;
+}
+
+.buttonlogDiv{
+    margin-left: 10px;
+    width: 250px;
+}
+
+.loginBtn{
+    width: 70px;
+    height: 35px;
+     background-color: rgb(224,236,244);
+     margin: 2px;
+     border: 1px solid #3c30e05e;
+     border-radius: 4px;
+     cursor: pointer;
+}
+
+.signupBtn{
+    cursor: pointer;
+    width: 70px;
+    height: 35px;
+     background-color: rgb(17,148,250);
+     margin: 2px;
+     border: 1px solid #3c30e05e;
+     border-radius: 4px;
+     color: white;
+}
+
+#myDropdown{
+    display: none;
+}
+
+.loginBtn:hover{
+    background-color: rgb(171, 212, 240);
+}
+
+.signupBtn:hover{
+    background-color: rgb(11, 110, 185);
+}
+
+
+.linkLogin{
+    text-decoration: none;
+    color: rgb(17,148,250);
+}
+
+.linkSignup{
+    text-decoration: none;
+    color: white;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .webname{
+        display: none;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) and (min-width:700px){
+    .searchTab{
+        width: 20%;
+    }
+  }
+
+  @media only screen and (max-width: 500px){
+    .searchTab{
+       width: 25%;
+    }
+  } 
+
+  @media only screen and (max-width: 500px){
+    .hamdiv{
+        display: block;
+    }
+  } 

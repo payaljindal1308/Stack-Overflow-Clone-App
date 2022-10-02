@@ -1,0 +1,43 @@
+.tagPage{
+    display: flex;
+    justify-content: center;
+}
+
+.tags{
+    text-align: left;
+    padding: 20px;
+    width: 70%;
+}
+
+.tags h1{
+    color: rgb(75, 73, 73);
+    font-weight: 400;
+}
+
+.tags input{
+    width: 200px;
+    height: 25px;
+    border: 1px solid rgb(182, 180, 180);
+    border-radius: 4px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.tagDiv{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.tagName{
+    width: 300px;
+    padding: 10px;
+    display: flex;
+    border: 1px solid rgb(187, 181, 181);
+    border-radius: 4px;
+    margin: 10px;
+    margin-left: 0px;
+}
+
+.userNameink{
+    text-decoration: none;
+}
