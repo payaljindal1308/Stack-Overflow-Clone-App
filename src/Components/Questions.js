@@ -8,7 +8,7 @@ import SideNav from "./SideNav";
 
 
 function Questions(){
-
+console.log("questions called")
 const [questions, setquestions] = useState([])
 const [Questions, setQuestions] = useState([])
 useEffect(() => {
@@ -22,6 +22,7 @@ useEffect(() => {
   })
   
 },[])
+console.log("Questions are:", questions)
 useEffect(() => {
     setQuestions(questions.sort((a,b) => b.timestamp - a.timestamp))
 })
