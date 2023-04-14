@@ -31,9 +31,6 @@ function App() {
 
   return (
     <div className="App">
-<<<<<<< HEAD
-      <h1>hello world !</h1>
-=======
     <UserContext.Provider value={user}>
     <Header></Header>
     <Routes>
@@ -50,7 +47,6 @@ function App() {
     <Route path="tag/:name" element={<ProtectedRoutes><Tag /></ProtectedRoutes>}></Route>
     </Routes>
     </UserContext.Provider>
->>>>>>> development
     </div>
   );
 }
